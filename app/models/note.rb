@@ -1,4 +1,4 @@
 class Note < ActiveRecord::Base
     validates :title, :presence => true
-    validates :body, :presence => true
+    validates :markdown, :presence => true
 end
