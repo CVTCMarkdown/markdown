@@ -18,7 +18,7 @@ class NotesControllerTest < ActionController::TestCase
 
   test "should create note" do
     assert_difference('Note.count') do
-      post :create, note: { markdown: @note.markdown, title: @note.title }
+      post :create, note: { markdown: @note.markdown, tags: @note.tags, title: @note.title }
     end
 
     assert_redirected_to note_path(assigns(:note))
@@ -35,7 +35,7 @@ class NotesControllerTest < ActionController::TestCase
   end
 
   test "should update note" do
-    patch :update, id: @note, note: { markdown: @note.markdown, title: @note.title }
+    patch :update, id: @note, note: { markdown: @note.markdown, tags: @note.tags, title: @note.title }
     assert_redirected_to note_path(assigns(:note))
   end
 
