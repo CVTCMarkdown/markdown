@@ -1,3 +1,16 @@
-// Place all the styles related to the notes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+div {&.markdown{
+    display: inline-block;
+    vertical-align: top;
+ }
+}
+
+#compiled{
+    height: 150px;
+    width: 500px;
+}
+
+textarea#note_markdown {
+  display: inline-block;
+  width: 500px;
+  height: 150px;
+}

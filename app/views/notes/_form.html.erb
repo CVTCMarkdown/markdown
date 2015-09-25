@@ -15,17 +15,20 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
+  
+    <div class="field">
+    <%= f.label :tag %><br>
+    <%= f.text_field :tag %>
+    </div>
+  
+   <div class="markdown">
     <%= f.label :markdown %><br>
     <%= f.text_area :markdown %>
   </div>
-   <div class="field">
-    <%= f.label :tag %><br>
-    <%= f.text_field :tag %>
+  
+  <div id="compiled" class="markdown">
   </div>
-  <div id="compiled">
-    
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
