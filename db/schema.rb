@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20150922003724) do
     t.text     "markdown"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "tag"
+    t.string   "tags"
   end
 
-  add_index "notes", ["tag"], name: "index_notes_on_tag"
+  add_index "notes", ["tags"], name: "index_notes_on_tags"
 
 end
