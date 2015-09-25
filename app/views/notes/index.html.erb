@@ -14,8 +14,6 @@
     <% @notes.each do |note| %>
       <tr>
         <td><%= link_to note.title, edit_note_path(note) %></td>
-        <td><%= note.markdown %></td>
-        <td><%= note.tags %></td>
       </tr>
     <% end %>
   </tbody>
