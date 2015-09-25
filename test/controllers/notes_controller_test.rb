@@ -18,15 +18,12 @@ class NotesControllerTest < ActionController::TestCase
 
   test "should create note" do
     assert_difference('Note.count') do
-      post :create, note: { markdown: @note.markdown, title: @note.title }
+      post :create, note: { markdown: @note.markdown, tags: @note.tags, title: @note.title }
     end
 
-    assert_redirected_to note_path(assigns(:note))
-  end
+    assert_template 'edit', locals: { note: @note }
 
-  test "should show note" do
-    get :show, id: @note
-    assert_response :success
+    #assert_redirected_to edit_note_path(assigns(:note))
   end
 
   test "should get edit" do
@@ -35,8 +32,11 @@ class NotesControllerTest < ActionController::TestCase
   end
 
   test "should update note" do
-    patch :update, id: @note, note: { markdown: @note.markdown, title: @note.title }
-    assert_redirected_to note_path(assigns(:note))
+    patch :update, id: @note, note: { markdown: @note.markdown, tags: @note.tags, title: @note.title }
+    
+    assert_template 'edit', locals: { note: @note }
+
+    #assert_redirected_to edit_note_path(assigns(:note))
   end
 
   test "should destroy note" do
