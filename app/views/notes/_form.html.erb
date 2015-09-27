@@ -17,8 +17,8 @@
   </div>
   
   <div class="field">
-    <%= f.label :tags %><br>
-    <%= f.text_field :tags %>
+    <%= f.label :tag_list, "Tags* (seperated by commas)" %><br>
+    <%= f.text_field :tag_list, value: @note.tag_list.join(", ") %>
   </div>
   
   <div class="markdown">
