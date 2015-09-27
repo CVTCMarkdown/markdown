@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+  <% unless @note.created_at.blank? %>
+    <div class="field">
+      <div class="stamp">created: <%= @note.created_at %></div>
+      <div class="stamp">last update: <%= @note.updated_at %></div>
+    </div>
+  <% end %>
+  
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title, maxLength: 250 %>
