@@ -1,0 +1,2 @@
+module SharedNoteHelper
+end

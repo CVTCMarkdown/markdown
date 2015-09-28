@@ -1,0 +1,13 @@
+<% unless @note.blank? %>
+
+<%= hidden_field_tag :markdown, @note.markdown %>
+
+
+<div id="compiled" class="markdown">
+</div>
+
+<% else %>
+    <h1>This note has been unshared or doesn't exist.</h1>
+<% end %>
+
+
