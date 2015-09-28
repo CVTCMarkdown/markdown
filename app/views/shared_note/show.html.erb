@@ -1,2 +1,15 @@
-<h1>SharedNote#show</h1>
-<p>Find me in app/views/shared_note/show.html.erb</p>
+<h1>Shared Note</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @note.title %>
+</p>
+
+
+<%= hidden_field_tag :markdown, @note.markdown %>
+
+
+<div id="compiled" class="markdown">
+</div>
+
+

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'shared_note/show'
+  get 'shared_note/:shared_token' => 'shared_note#show'
 
   resources :notes
   # The priority is based upon order of creation: first created -> highest priority.
@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   root 'notes#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #   get 'product/:id' => 'catalog#view'
+  
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
