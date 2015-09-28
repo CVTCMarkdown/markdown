@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927012241) do
+ActiveRecord::Schema.define(version: 20150928010146) do
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
     t.text     "markdown"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "url"
   end
 
   create_table "taggings", force: :cascade do |t|
