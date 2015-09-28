@@ -46,4 +46,14 @@ class NotesControllerTest < ActionController::TestCase
 
     assert_redirected_to notes_path
   end
+  
+  test "should share note" do
+    put :share, id: @note
+    assert_redirected_to edit_note_path
+  end
+  
+  test "should unshare note" do
+    put :unshare, id: @note
+    assert_redirected_to edit_note_path
+  end
 end

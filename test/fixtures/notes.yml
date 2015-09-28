@@ -3,9 +3,7 @@
 one:
   title: MyString
   markdown: MyText
-  tags: MyText
 
 two:
   title: MyString
   markdown: MyText
-  tags: MyText
