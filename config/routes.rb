@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
-  get 'shared_note/:shared_token' => 'shared_note#show', as: :
+  get 'shared_note/:shared_token' => 'shared_note#show', as: :shared_note
+  
 
   resources :notes
+  put 'notes/:id/share' => 'notes#share', as: :share_note
+  put 'notes/:id/unshare' => 'notes#unshare', as: :unshare_note
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'notes#index'
+  
 
   # Example of regular route:
   #   get 'product/:id' => 'catalog#view'

@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :unshare]
 
   # GET /notes
   # GET /notes.json
@@ -12,10 +12,19 @@ class NotesController < ApplicationController
   def show
   end
   
+  # PUT /note/1/share
   def share
     @note.share
     if @note.save
-      html { render :edit, notice: 'Note was successfully shared.' }
+      redirect_to edit_note_url(@note), notice: 'Note was successfully shared.'
+    end
+  end
+  
+  # PUT /note/1/unshare
+  def unshare
+    @note.unshare
+    if @note.save
+      redirect_to edit_note_url(@note), notice: 'Note was successfully unshared.'
     end
   end
 

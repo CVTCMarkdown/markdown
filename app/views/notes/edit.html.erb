@@ -2,11 +2,6 @@
 
 <%= render 'form' %>
 
-<%= if @note.shared_token.blank? %>
-<%= link_to 'Share', @note %> |
-<%= else %>
-<div>
-  note shared at url
-</div>
+<%= link_to_toggle_share %> |
 <%= link_to 'Back', notes_path %> |
 <%= link_to 'Delete', @note, method: :delete, data: { confirm: 'Are you sure?' } %>

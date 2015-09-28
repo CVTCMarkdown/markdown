@@ -6,6 +6,7 @@ target = '#compiled'
 
 pageLoadHandler = ->
     $(target).html marked $(source).val()
+    $(source).remove()
     
     
 $(document).on 'page:load', pageLoadHandler

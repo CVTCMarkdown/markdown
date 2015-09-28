@@ -1,3 +1,8 @@
+@mixin meta {
+    color:hsl(0,0%,50%);
+    font-size:12px;
+}
+
 div {&.markdown{
     display: inline-block;
     vertical-align: top;
@@ -15,7 +20,8 @@ textarea#note_markdown {
   height: 150px;
 }
 
-.field .stamp {
-    color:hsl(0,0%,50%);
-    font-size:12px;
+.field {
+    & .meta, .meta a {
+        @include meta;
+    }
 }

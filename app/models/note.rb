@@ -4,7 +4,7 @@ class Note < ActiveRecord::Base
     acts_as_taggable
     
     def share
-       self.shared_token = SecureRandom.base64(10) 
+       self.shared_token = SecureRandom.hex(10) 
     end
     
     def unshare
