@@ -11,6 +11,13 @@ class NotesController < ApplicationController
   # GET /notes/1.json
   def show
   end
+  
+  def share
+    @note.share
+    if @note.save
+      html { render :edit, notice: 'Note was successfully shared.' }
+    end
+  end
 
   # GET /notes/new
   def new

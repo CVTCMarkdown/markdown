@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'shared_note/:shared_token' => 'shared_note#show'
+  get 'shared_note/:shared_token' => 'shared_note#show', as: :
 
   resources :notes
   # The priority is based upon order of creation: first created -> highest priority.
