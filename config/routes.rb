@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'shared_note/show'
+
   resources :notes
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
