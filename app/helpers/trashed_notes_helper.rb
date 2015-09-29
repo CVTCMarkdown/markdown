@@ -1,0 +1,2 @@
+module TrashedNotesHelper
+end
