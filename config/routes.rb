@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard/show'
+
   get 'shared_note/:shared_token' => 'shared_note#show', as: :shared_note
   
   resources :trashed_notes, :only => [:index, :update, :destroy]
