@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'tags/index'
+
+  get 'tags/related_notes'
+
   get 'dashboard/show'
 
   get 'shared_note/:shared_token' => 'shared_note#show', as: :shared_note
