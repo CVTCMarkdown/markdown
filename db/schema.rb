@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928012005) do
+ActiveRecord::Schema.define(version: 20150928212400) do
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150928012005) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "shared_token"
+    t.boolean  "active"
   end
 
   create_table "taggings", force: :cascade do |t|

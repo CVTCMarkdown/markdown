@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'shared_note/:shared_token' => 'shared_note#show', as: :shared_note
   
+  resources :trashed_notes, :only => [:index, :update, :destroy]
+  
 
   resources :notes
   put 'notes/:id/share' => 'notes#share', as: :share_note

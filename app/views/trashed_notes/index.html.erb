@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Trash Can</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Restore</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notes.each do |note| %>
+      <tr>
+        <td><%= note.title %></td>
+        <td><%= link_to 'Delete', trashed_note_url(note), method: :delete, data: { confirm: 'Are you sure you want to delete?' }%></td>
+        <td><%= link_to 'Restore', trashed_note_url(note), method: :put, data: { confirm: 'Are you sure you want to restore?' }%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Note', new_note_path %>
+
