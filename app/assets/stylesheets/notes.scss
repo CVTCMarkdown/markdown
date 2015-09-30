@@ -3,10 +3,10 @@
     font-size:12px;
 }
 
-div {&.markdown{
-    display: inline-block;
-    vertical-align: top;
- }
+.field {
+    & .meta, .meta a {
+        @include meta;
+    }
 }
 
 #compiled{
@@ -14,14 +14,22 @@ div {&.markdown{
     width: 500px;
 }
 
+div {&.markdown{
+    display: inline-block;
+    vertical-align: top;
+ }
+}
+
+input#note_title {
+  width: 500px;
+}
+
+input#note_tag_list {
+  width: 500px;
+}
+
 textarea#note_markdown {
   display: inline-block;
   width: 500px;
   height: 150px;
-}
-
-.field {
-    & .meta, .meta a {
-        @include meta;
-    }
 }
