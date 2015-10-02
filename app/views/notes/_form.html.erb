@@ -14,7 +14,7 @@
   <% unless @note.created_at.blank? %>
     <div class="field">
       <div class="meta">Created: <%= @note.created_at %></div>
-      <div class="meta">Last update: <%= @note.updated_at %></div>
+      <div class="meta">Last Update: <%= @note.updated_at %></div>
       <div class="meta">Sharing: <%=link_to_shared %></div>
     </div>
   <% end %>
