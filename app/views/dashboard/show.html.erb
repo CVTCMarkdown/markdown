@@ -1,2 +1,36 @@
-<h1>Dashboard#show</h1>
-<p>Find me in app/views/dashboard/show.html.erb</p>
+<h1>Dashboard</h1>
+
+
+<%= link_to "New Note", new_note_path %>
+
+<% if @notes.blank? %>
+  <h3>You don't have any notes! Create a note by clicking on the New Note button above.</h3>
+<% else %>
+  <table id="note_list">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Last Updated</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @notes.each do |note| %>
+        <tr>
+          <td><%= link_to note.title, edit_note_path(note) %></td>
+          <td><%= note.updated_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to "All Notes", notes_path %>
+<% end %>
+
+<div id="tag_list">
+  <% @tags.each do |tag| %>
+    <div class="tag tag<%= tag.count%>"><%= tag.name %></div>
+  <% end %>
+</div>
+
+ 

@@ -1,3 +1,21 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tag {
+  display: inline-block;
+  border: 1px solid gray;
+  padding: 5px;
+  margin: 2px;
+}
+
+#tag_list, #note_list{
+  width: 500px;
+}
+
+@for $i from 1 through 10 {
+    .tag#{$i}{
+      background: hsl(130, 100% - 5*$i, 90% - 4*$i);
+    }
+}
+
