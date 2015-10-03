@@ -3,7 +3,9 @@
 one:
   title: MyString
   markdown: MyText
+  active: true
 
 two:
   title: MyString
   markdown: MyText
+  active: true
