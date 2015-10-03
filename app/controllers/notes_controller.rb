@@ -1,10 +1,12 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :unshare]
 
+
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.where("active=?", true)
+    @notes = Note.active
+    @notes = @notes.with_text(params[:q]) unless params[:q].blank?
   end
 
   # GET /notes/1
@@ -91,6 +93,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:title, :markdown, :tag_list)
+      params.require(:note).permit(:title, :markdown, :tag_list, :q)
     end
 end

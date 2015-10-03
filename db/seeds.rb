@@ -7,6 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+goodAdjectivesPattern = /^((?!(un)?\w+(ing|less)$)|(?=\w+_))/
+RandomWord.exclude_list << /^.{8,}$/ 
+RandomWord.exclude_list << /^.{0,6}$/ 
 
 loop do
   noteCount = Note.count
@@ -14,26 +17,21 @@ loop do
   
   begin
 
-    RandomWord.exclude_list.clear
-    RandomWord.exclude_list << /^(?!(un)?\w+(ing|ss)$)/
+    RandomWord.exclude_list << goodAdjectivesPattern
     
-    nextMarkdown = "Yesterday I saw the most " + RandomWord.phrases.take(5).join(", ")
+    nextMarkdown = "Yesterday I saw the most " + RandomWord.adjs.rewind.take(5).join(", ")
     
-    RandomWord.exclude_list.clear
+    RandomWord.exclude_list.delete goodAdjectivesPattern
     
-    nextMarkdown += RandomWord.nouns.next
+    nextMarkdown << " " + RandomWord.nouns.rewind.next
     
     nextTags = RandomWord.nouns.take(3).join(", ")
     
-    
-    
     Note.create(title: "Note #{noteCount}", markdown: nextMarkdown, active: true, tag_list: nextTags)
-    
-    puts "#{noteCount}th record inserted"
+
   rescue StopIteration => e
     puts e
-    RandomWord.adjs.rewind
-    RandomWord.nouns.rewind
+
     next
   end
 

@@ -2,7 +2,10 @@
 
 
 <%= link_to "New Note", new_note_path %>
-
+<%= form_tag notes_path, method: :get do %>
+  <%= text_field_tag :q %>
+  <%= submit_tag "Search" %>
+<% end %>
 <% if @notes.blank? %>
   <h3>You don't have any notes! Create a note by clicking on the New Note button above.</h3>
 <% else %>
@@ -28,9 +31,9 @@
 <% end %>
 
 <div id="tag_list">
-  <% @tags.each do |tag| %>
-    <div class="tag tag<%= tag.count%>"><%= tag.name %></div>
-  <% end %>
+  <%= render partial: 'tags/show', collection: @tags, as: :tag, locals: {topscore:@topscore} %>
 </div>
+
+<%= link_to "All Tags", tags_path %>
 
  

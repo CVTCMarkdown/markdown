@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'tags/index'
-
-  get 'tags/related_notes'
+  get 'tags/index', as: :tags
 
   get 'dashboard/'=>'dashboard#show', as: :dashboard
 
