@@ -30,7 +30,7 @@ class NotesControllerTest < ActionController::TestCase
     get :edit, id: @note
     assert_response :success
     assert_select "a.fa.fa-arrow-left"
-    assert_select "a.fa.fa-share-sqare-o"
+    assert_select "a.fa.fa-share-square-o"
     assert_select "a.fa.fa-trash-o"
   end
 
