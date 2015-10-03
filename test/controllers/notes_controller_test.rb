@@ -29,9 +29,21 @@ class NotesControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, id: @note
     assert_response :success
-    assert_select "a.fa.fa-arrow-left"
-    assert_select "a.fa.fa-share-square-o"
-    assert_select "a.fa.fa-trash-o"
+    # assert_select "a.fa.fa-arrow-left"
+    # assert_select "a.fa.fa-share-square-o"
+    # assert_select "a.fa.fa-trash-o"
+    
+    assert_select ".action-item:nth-of-type(1)" do
+      assert_select ".fa.fa-arrow-left"
+    end
+    assert_select ".action-item:nth-of-type(2)" do
+      assert_select ".fa.fa-share-square-o"
+    end
+    assert_select ".action-item:nth-of-type(3)" do
+      assert_select ".fa.fa-trash-o"
+    end
+      
+    
   end
 
   test "should update note" do
