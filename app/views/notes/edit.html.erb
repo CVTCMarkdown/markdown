@@ -1,7 +1,8 @@
 <h1>Editing Note</h1>
 
-<%= render 'form' %>
 
+<%= link_to '', notes_path, class: "action-item fa fa-arrow-left" %> |
 <%= link_to_toggle_share %> |
-<%= link_to 'Back', notes_path %> |
-<%= link_to 'Delete', @note, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<%= link_to '', @note, method: :delete, data: { confirm: 'Are you sure?' }, class: "action-item fa fa-trash-o" %>
+<%= render 'form' %>
