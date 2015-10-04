@@ -37,19 +37,6 @@ class NotesControllerTest < ActionController::TestCase
         end
       end
     end
-
-    assert_select ".action-item:nth-of-type(1)" do
-      assert_select ".fa.fa-arrow-left"
-    end
-    
-    assert_select ".action-item:nth-of-type(2)" do
-      assert_select ".fa.fa-share-square-o"
-    end
-    
-    assert_select ".action-item:nth-of-type(3)" do
-      assert_select ".fa.fa-trash-o"
-    end
-      
   end
 
   test "should update note" do
