@@ -34,6 +34,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'marked-rails'
 
+gem 'jquery-ui-rails'
+
+gem 'rails4-autocomplete'
+
 gem 'acts-as-taggable-on', '~> 3.5.0'
 
 group :development, :test do

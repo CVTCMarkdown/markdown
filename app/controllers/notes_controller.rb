@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :unshare]
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag' 
 
   # GET /notes
   # GET /notes.json
