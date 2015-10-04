@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'tags/related_notes'
 
-  get 'dashboard/show'
+  get 'dashboard/'=>'dashboard#show', as: :dashboard
 
   get 'shared_note/:shared_token' => 'shared_note#show', as: :shared_note
   
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'notes#index'
+  root 'dashboard#show'
   
 
   # Example of regular route:
