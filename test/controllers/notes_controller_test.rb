@@ -24,6 +24,7 @@ class NotesControllerTest < ActionController::TestCase
     assert_template 'edit', locals: { note: @note }
 
     #assert_redirected_to edit_note_path(assigns(:note))
+    assert_equal 'Note was successfully created.', flash[:notice]
   end
 
   test "should get edit" do
@@ -37,6 +38,12 @@ class NotesControllerTest < ActionController::TestCase
         end
       end
     end
+    
+    #assert assigns(:notice), "Edit page should have a notice."
+    assert_select "#notice", flash[:notice]
+    # put_via_redirect note_path, note:@note
+    # assert_equal edit_note_path, path
+    
   end
 
   test "should update note" do
@@ -45,6 +52,7 @@ class NotesControllerTest < ActionController::TestCase
     assert_template 'edit', locals: { note: @note }
 
     #assert_redirected_to edit_note_path(assigns(:note))
+    assert_equal 'Note was successfully updated.', flash[:notice]
   end
 
   test "should destroy note" do
