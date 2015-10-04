@@ -29,7 +29,15 @@ class NotesControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, id: @note
     assert_response :success
-    
+
+    assert_select "h1" do
+      assert_select "+a.fa-arrow-left[href=?]", notes_path do
+        assert_select "+a.fa-share-square-o[href=?]", share_note_path(@note) do
+          assert_select "+a.fa-trash-o[href=?][data-method=?]", note_path(@note), 'delete'
+        end
+      end
+    end
+
     assert_select ".action-item:nth-of-type(1)" do
       assert_select ".fa.fa-arrow-left"
     end
