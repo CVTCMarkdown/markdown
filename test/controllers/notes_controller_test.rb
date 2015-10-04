@@ -40,7 +40,6 @@ class NotesControllerTest < ActionController::TestCase
     end
     
     assert_select "#notice", flash[:notice]
-    
   end
 
   test "should update note" do
@@ -72,5 +71,9 @@ class NotesControllerTest < ActionController::TestCase
   test "should autocomplete tags" do
     xhr :post, :autocomplete_tag_name, term:"tag"
     assert_response :success
+    body = JSON.parse response.body
+    assert_equal 3, body.count 
+    
   end
+  
 end
