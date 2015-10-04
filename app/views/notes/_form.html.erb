@@ -26,7 +26,7 @@
   
   <div class="field">
     <%= f.label :tag_list, "Tags* (seperated by commas)" %><br>
-    <%= f.text_field :tag_list, value: @note.tag_list.join(", ") %>
+    <%= f.autocomplete_field :tag_list, autocomplete_tag_name_notes_path, 'data-delimiter' => ', ', value: @note.tag_list.join(", ")%>
   </div>
   
   <div class="markdown">

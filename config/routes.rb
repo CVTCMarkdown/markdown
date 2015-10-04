@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :trashed_notes, :only => [:index, :update, :destroy]
   
 
-  resources :notes
+  resources :notes do 
+    get :autocomplete_tag_name, :on => :collection 
+  end
   put 'notes/:id/share' => 'notes#share', as: :share_note
   put 'notes/:id/unshare' => 'notes#unshare', as: :unshare_note
   # The priority is based upon order of creation: first created -> highest priority.
