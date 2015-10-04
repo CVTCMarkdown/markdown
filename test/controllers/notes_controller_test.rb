@@ -68,4 +68,9 @@ class NotesControllerTest < ActionController::TestCase
     put :unshare, id: @note
     assert_redirected_to edit_note_path
   end
+  
+  test "should autocomplete tags" do
+    xhr :post, :autocomplete_tag_name, term:"tag"
+    assert_response :success
+  end
 end
