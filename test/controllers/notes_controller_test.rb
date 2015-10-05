@@ -50,12 +50,16 @@ class NotesControllerTest < ActionController::TestCase
     assert_equal 'Note was successfully updated.', flash[:notice]
   end
 
-  test "should destroy note" do
-    assert_difference('Note.count', -1) do
-      delete :destroy, id: @note
+  test "should send note to trashcan" do
+
+    assert_difference("Note.where('active=?', false).count", 1) do
+      assert_difference("Note.where('active=?',true).count", -1) do
+        delete :destroy, id: @note
+      end
     end
 
-    assert_redirected_to notes_path
+    assert_redirected_to trashed_notes_path
+
   end
   
   test "should share note" do
