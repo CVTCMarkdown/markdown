@@ -12,3 +12,7 @@ two:
   markdown: MyText
   active: true
   
+deletedNote:
+  title: Old Trashed Note
+  markdown: Markdown is awesome
+  active: false

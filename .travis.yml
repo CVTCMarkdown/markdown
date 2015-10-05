@@ -1,0 +1,11 @@
+language: ruby
+before_install:
+  - gem install bundler --version 1.10.6
+rvm:
+  - 2.2.3
+script:
+  - bundle exec rake db:migrate
+  - bundle exec rake db:test:prepare
+  - bundle exec rake test
+env:
+  - DB=sqlite
