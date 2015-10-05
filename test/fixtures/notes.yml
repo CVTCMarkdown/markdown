@@ -13,6 +13,6 @@ two:
   active: true
   
 deletedNote:
-  title: Title 1
-  markdown: #Markdown is awesome
+  title: Old Trashed Note
+  markdown: Markdown is awesome
   active: false

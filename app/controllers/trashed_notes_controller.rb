@@ -14,7 +14,7 @@ class TrashedNotesController < ApplicationController
 
   def destroy
     if @note.destroy
-      redirect_to trashed_notes_url(), notice: "The note is now gone"
+      redirect_to trashed_notes_url(), notice: 'Note was successfully destroyed.'
     end
   end
   

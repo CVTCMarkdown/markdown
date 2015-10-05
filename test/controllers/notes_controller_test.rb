@@ -12,6 +12,17 @@ class NotesControllerTest < ActionController::TestCase
 
     assert assigns(:trash_count)
     assert_select "a[href=?]", trashed_notes_path, {text: "Trash Can (1)"}
+
+    titles = Note.where('active=?', true).map{|note| note.title}
+
+    linkTexts = nil
+    assert_select("table td:first-child>a", :count => titles.size) do |elements|
+      linkTexts = elements.map {|element| element.children.first.content }
+    end
+    titles.each do |title|
+      assert_includes linkTexts, title
+    end
+
   end
 
   test "should get new" do
@@ -42,6 +53,13 @@ class NotesControllerTest < ActionController::TestCase
       end
     end
     
+
+
+    assert_select "input[name=?][value=?][maxlength=?]", "note[title]", "MyString", "250"
+    assert_select "input[name=?][value=?]", "note[tag_list]", ""
+    assert_select "textarea[name=?]", "note[markdown]", "MyText"
+
+
     assert_select "#notice", flash[:notice]
   end
 
@@ -53,12 +71,16 @@ class NotesControllerTest < ActionController::TestCase
     assert_equal 'Note was successfully updated.', flash[:notice]
   end
 
-  test "should destroy note" do
-    assert_difference('Note.count', -1) do
-      delete :destroy, id: @note
+  test "should send note to trashcan" do
+
+    assert_difference("Note.where('active=?', false).count", 1) do
+      assert_difference("Note.where('active=?',true).count", -1) do
+        delete :destroy, id: @note
+      end
     end
 
-    assert_redirected_to notes_path
+    assert_redirected_to trashed_notes_path
+
   end
   
   test "should share note" do

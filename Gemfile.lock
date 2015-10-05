@@ -154,6 +154,7 @@ DEPENDENCIES
   marked-rails
   rails (= 4.2.1)
   rails4-autocomplete
+  rake
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sqlite3
@@ -162,4 +163,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.3
+   1.10.6
