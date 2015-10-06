@@ -6,6 +6,7 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @notes = Note.where("active=?", true)
+    @trash_count = Note.where("active=?", false).count
   end
 
   # GET /notes/1
