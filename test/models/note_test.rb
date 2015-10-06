@@ -30,4 +30,11 @@ class NoteTest < ActiveSupport::TestCase
     @note.title = "title" * 51
     assert_not @note.save
   end
+
+  test "can save multiple tags delimited by comma" do
+    @note.tag_list = "tag1, tag2, tag3"
+    assert_difference "ActsAsTaggableOn::Tagging.count", 3 do
+      @note.save
+    end
+  end
 end
