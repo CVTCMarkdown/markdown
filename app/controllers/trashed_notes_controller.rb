@@ -8,13 +8,13 @@ class TrashedNotesController < ApplicationController
   def update
     @note.active = true
     if @note.save
-      redirect_to trashed_notes_url(), notice: 'Note was successfully shared.'
+      redirect_to trashed_notes_url(), notice: 'Note was successfully restored.'
     end
   end
 
   def destroy
     if @note.destroy
-      redirect_to trashed_notes_url(), notice: "The note is now gone"
+      redirect_to trashed_notes_url(), notice: 'Note was successfully destroyed.'
     end
   end
   

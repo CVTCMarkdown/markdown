@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :unshare]
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag' 
 
 
   # GET /notes
@@ -7,6 +8,7 @@ class NotesController < ApplicationController
   def index
     @notes = Note.active
     @notes = @notes.with_text(params[:q]) unless params[:q].blank?
+    @trash_count = Note.where("active=?", false).count
   end
 
   # GET /notes/1
@@ -47,7 +49,8 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { render :edit, notice: 'Note was successfully created.' }
+        flash[:notice] = 'Note was successfully created.'
+        format.html { render :edit }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -61,7 +64,8 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { render :edit, notice: 'Note was successfully updated.' }
+        flash[:notice] = 'Note was successfully updated.'
+        format.html { render :edit }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }

@@ -34,6 +34,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'marked-rails'
 
+gem 'jquery-ui-rails'
+
+gem 'rails4-autocomplete'
+
 gem 'acts-as-taggable-on', '~> 3.5.0'
 
 gem 'random-word'
@@ -45,5 +49,9 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
+end
+
+group :test do
+  gem 'rake'
 end
 

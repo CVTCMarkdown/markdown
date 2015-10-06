@@ -1,11 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   title: MyString
   markdown: MyText
   active: true
 
 two:
+  id: 2
   title: MyString
   markdown: MyText
   active: true
+  
+deletedNote:
+  title: Old Trashed Note
+  markdown: Markdown is awesome
+  active: false
