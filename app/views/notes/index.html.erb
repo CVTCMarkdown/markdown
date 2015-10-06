@@ -24,3 +24,4 @@
 
 <%= link_to 'New Notes', new_note_path %> |
 <%= link_to 'Trash Can',trashed_notes_path(@note)%>
+<%= Note.count(:condition => "active = false")%>
