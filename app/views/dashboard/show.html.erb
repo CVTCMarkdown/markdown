@@ -3,7 +3,7 @@
 
 <%= link_to "New Note", new_note_path %>
 <%= form_tag notes_path, method: :get do %>
-  <%= text_field_tag :q %>
+  <%= text_field_tag :search %>
   <%= submit_tag "Search" %>
 <% end %>
 <% if @notes.blank? %>
