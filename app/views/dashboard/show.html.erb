@@ -1,2 +1,51 @@
-<h1>Dashboard#show</h1>
-<p>Find me in app/views/dashboard/show.html.erb</p>
+<h1>Dashboard</h1>
+<div id="dashboard">
+  <div class="section">
+    <%= link_to "New Note", new_note_path %>
+    <%= form_tag notes_path, method: :get, id: "search_form" do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+  
+  <% if @notes.blank? %>
+    <div class="section">
+      <h3>You don't have any notes! Create a note by clicking on the New Note button above.</h3>
+    </div>
+  <% else %>
+    <div id="recent_notes" class="section">
+      <h3>Recent Notes</h3>
+      <table id="note_list">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @notes.each do |note| %>
+            <tr>
+              <td><%= link_to note.title, edit_note_path(note) %></td>
+              <td><%= note.updated_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+  <div id="all_notes" class="all-items">
+  <%= link_to "All Notes", notes_path%>
+  </div>
+  
+  <% end %>
+  
+  <div id="tag_list" class="section">
+    <h3>Most Used Tags</h3>
+    <%= render partial: 'tags/show', collection: @tags, as: :tag, locals: {topscore:@topscore} %>
+  </div>
+  
+  <div id="all_tags" class="all-items">
+    <%= link_to "All Tags", tags_path %>
+  </div>
+</div>

@@ -3,6 +3,8 @@
     font-size:12px;
 }
 
+$column_width: 600px;
+
 .field {
     & .meta, .meta a {
         @include meta;
@@ -11,7 +13,7 @@
 
 #compiled{
     height: 150px;
-    width: 500px;
+    width: $column_width;
 }
 
 div {&.markdown{
@@ -21,16 +23,16 @@ div {&.markdown{
 }
 
 input#note_title {
-  width: 500px;
+  width: $column_width;
 }
 
 input#note_tag_list {
-  width: 500px;
+  width: $column_width;
 }
 
 textarea#note_markdown {
   display: inline-block;
-  width: 500px;
+  width: $column_width;
   height: 150px;
 }
 

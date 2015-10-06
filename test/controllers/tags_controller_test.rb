@@ -6,9 +6,4 @@ class TagsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get related_notes" do
-    get :related_notes
-    assert_response :success
-  end
-
 end

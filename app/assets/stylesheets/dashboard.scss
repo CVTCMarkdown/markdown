@@ -1,3 +1,68 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$columnWidth: 500px;
+
+#dashboard{
+  display:inline-block;
+  width:500px;
+}
+.tag {
+  display: inline-block;
+  border: 1px solid transparent;
+  padding: 5px;
+  margin: 6px 0;
+  border-radius: 4px;
+  text-decoration: none;
+  position:relative;
+  &:hover{
+    background:white !important;
+    color:#555 !important;
+    border: 1px solid #999;
+  }
+}
+
+#tag_list, #note_list{
+  width: $columnWidth;
+  border-collapse:collapse;
+}
+
+
+
+#tag_list {
+  text-align: justify;
+}
+
+.section{
+  width:500px;
+  padding:15px;
+}
+
+#search_form {
+  display:inline-block;
+  float:right;
+  & #search {
+    width:250px;
+  }
+}
+
+#recent_notes, #tag_list{
+  border: 1px solid #999;
+  margin: 10px 0;
+  & h3{
+    margin-top:0;
+  }
+}
+#note_list {
+  & th, td{
+    text-align: left;
+  }
+}
+
+
+.all-items{
+  text-align:right;
+  padding-right:15px;
+}
+

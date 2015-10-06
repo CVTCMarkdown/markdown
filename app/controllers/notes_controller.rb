@@ -2,10 +2,12 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :unshare]
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag' 
 
+
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.where("active=?", true)
+    @notes = Note.active
+    @notes = @notes.with_text(params[:search]) unless params[:search].blank?
     @trash_count = Note.where("active=?", false).count
   end
 
@@ -95,6 +97,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:title, :markdown, :tag_list)
+      params.require(:note).permit(:title, :markdown, :tag_list, :search)
     end
 end
