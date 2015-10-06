@@ -9,6 +9,9 @@ class NotesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:notes)
+
+    assert assigns(:trash_count)
+    assert_select "a[href=?]", trashed_notes_path, {text: "Trash Can (1)"}
   end
 
   test "should get new" do
