@@ -13,7 +13,7 @@ RandomWord.exclude_list << /^.{0,6}$/
 
 loop do
   noteCount = Note.count
-  break if noteCount >= 1000000
+  break if noteCount >= 20
   
   begin
 
