@@ -42,6 +42,8 @@ gem 'acts-as-taggable-on', '~> 3.5.0'
 
 gem 'random-word'
 
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
