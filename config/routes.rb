@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'tags/index', as: :tags
 
   get 'dashboard/'=>'dashboard#show', as: :dashboard
