@@ -4,7 +4,17 @@ class NoteTest < ActiveSupport::TestCase
   setup do
     @note = notes(:one)
   end
-  
+
+  test "can get active notes" do
+    assert_not Note.active.exists?(active: false)
+    assert_equal 2, Note.active.count
+  end
+
+  test "can get inactive notes" do
+    assert_not Note.inactive.exists?(active: true)
+    assert_equal 1, Note.inactive.count
+  end
+
   test "can share" do
     @note.share
     assert !@note.shared_token.blank?
