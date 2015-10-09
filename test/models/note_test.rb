@@ -37,4 +37,12 @@ class NoteTest < ActiveSupport::TestCase
       @note.save
     end
   end
+
+  test "can throw away and restore note" do
+    @note.throw_away
+    assert_not @note.active
+
+    @note.restore
+    assert @note.active
+  end
 end
