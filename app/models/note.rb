@@ -4,6 +4,7 @@ class Note < ActiveRecord::Base
   acts_as_taggable
   scope :with_text, -> (text) {where("markdown like ?", "%#{text}%")}
   scope :active, -> {where("active=?",true)}
+  scope :inactive, -> {where(active: false)}
 
   def share
      self.shared_token = SecureRandom.hex(10)
