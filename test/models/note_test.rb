@@ -15,6 +15,20 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal 1, Note.inactive.count
   end
 
+  test "can search with text" do
+    @notes = Note.with_text 'Tex'
+    
+    assert_equal 2, @notes.count
+    @notes.each do |note|
+      assert_equal 'MyText', note.markdown
+    end
+    
+    @notes = Note.with_text 'Trashed'
+    assert_equal 1, @notes.count
+    assert_equal 'Old Trashed Note', @notes.first.title
+    
+  end
+  
   test "can share" do
     @note.share
     assert !@note.shared_token.blank?
