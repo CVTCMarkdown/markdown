@@ -6,22 +6,23 @@ class NotesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    # TEST ROUTING
+    assert_routing({path: '/notes', method: 'get'}, {controller: 'notes', action: 'index'})
+    assert_routing(notes_path, {controller: 'notes', action: 'index'})
+
+    # TEST REQUEST/RESPONSE
     get :index
     assert_response :success
-    assert_not_nil assigns(:notes)
-
-    assert assigns(:trash_count)
-    assert_select "a[href=?]", trashed_notes_path, {text: "Trash Can (1)"}
-
-    titles = Note.where('active=?', true).map{|note| note.title}
-
-    linkTexts = nil
-    assert_select("table td:first-child>a", :count => titles.size) do |elements|
-      linkTexts = elements.map {|element| element.children.first.content }
-    end
-    titles.each do |title|
-      assert_includes linkTexts, title
-    end
+    
+    # TEST ASSIGNS
+    assert_not_nil @notes = assigns(:notes)
+    assert_not_nil @trash_count = assigns(:trash_count) 
+    
+    # TEST FLASH MESSAGES
+    
+    # TEST TEMPLATE
+    assert_template :index
+    assert_template layout: 'application'
 
   end
 

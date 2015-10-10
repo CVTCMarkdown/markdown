@@ -7,7 +7,7 @@ class NoteTest < ActiveSupport::TestCase
 
   test "can get active notes" do
     assert_not Note.active.exists?(active: false)
-    assert_equal 2, Note.active.count
+    assert_equal 3, Note.active.count
   end
 
   test "can get inactive notes" do
@@ -16,14 +16,14 @@ class NoteTest < ActiveSupport::TestCase
   end
 
   test "can search with text" do
-    @notes = Note.with_text 'Tex'
+    @notes = Note.with_text 'awesome sauce'
     
-    assert_equal 2, @notes.count
+    assert_equal 1, @notes.count
     @notes.each do |note|
-      assert_equal 'MyText', note.markdown
+      assert_equal 'Indeed Markdown is awesome sauce', note.markdown
     end
     
-    @notes = Note.with_text 'Trashed'
+    @notes = Note.with_text 'Old Trashed'
     assert_equal 1, @notes.count
     assert_equal 'Old Trashed Note', @notes.first.title
     

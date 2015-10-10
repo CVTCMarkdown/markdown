@@ -16,3 +16,8 @@ deletedNote:
   title: Old Trashed Note
   markdown: Markdown is awesome
   active: false
+  
+three:
+  title: New Not Trashed Note
+  markdown: Indeed Markdown is awesome sauce
+  active: true
