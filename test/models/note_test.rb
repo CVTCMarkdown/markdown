@@ -4,6 +4,30 @@ class NoteTest < ActiveSupport::TestCase
   setup do
     @note = notes(:one)
   end
+
+  test "can get active notes" do
+    assert_not Note.active.exists?(active: false)
+    assert_equal 3, Note.active.count
+  end
+
+  test "can get inactive notes" do
+    assert_not Note.inactive.exists?(active: true)
+    assert_equal 1, Note.inactive.count
+  end
+
+  test "can search with text" do
+    @notes = Note.with_text 'awesome sauce'
+    
+    assert_equal 1, @notes.count
+    @notes.each do |note|
+      assert_equal 'Indeed Markdown is awesome sauce', note.markdown
+    end
+    
+    @notes = Note.with_text 'Old Trashed'
+    assert_equal 1, @notes.count
+    assert_equal 'Old Trashed Note', @notes.first.title
+    
+  end
   
   test "can share" do
     @note.share

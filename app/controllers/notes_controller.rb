@@ -7,8 +7,8 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @notes = Note.active
-    @notes = @notes.with_text(params[:search]) unless params[:search].blank?
-    @trash_count = Note.where("active=?", false).count
+    @notes = @notes.active.with_text(params[:search]) unless params[:search].blank?
+    @trash_count = Note.inactive.count
   end
 
   # GET /notes/1
