@@ -1,5 +1,6 @@
 class SharedNoteController < ApplicationController
   before_action :set_note, only: [:show]
+  skip_before_action :authenticate_user!
   def show
     render :layout => false
   end

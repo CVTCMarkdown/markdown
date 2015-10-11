@@ -3,6 +3,7 @@ require 'test_helper'
 class TrashedNotesControllerTest < ActionController::TestCase
   setup do
     @note = notes(:deletedNote)
+    sign_in users(:vhazen)
   end
 
   test "should get index" do

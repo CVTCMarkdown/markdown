@@ -3,6 +3,18 @@ require 'test_helper'
 class NoteTest < ActiveSupport::TestCase
   setup do
     @note = notes(:one)
+
+    Note.delete_all
+    Note.create(title: 'title 1', markdown: 'markdown', active: true)
+    Note.create(title: 'title 2', markdown: 'markdown', active: true)
+    Note.create(title: 'title 3', markdown: 'markdown', active: true)
+    Note.create(title: 'title 4', markdown: 'markdown', active: false)
+  end
+
+  test "can get recent notes" do
+    assert_equal 'title 4', Note.most_recent(1).last.title
+    assert_equal 'title 3', Note.most_recent(2).last.title
+    assert_equal 'title 2', Note.most_recent(3).last.title
   end
 
   test "can get active notes" do
@@ -16,17 +28,14 @@ class NoteTest < ActiveSupport::TestCase
   end
 
   test "can search with text" do
+    @note_in_question = Note.create(title: 'with text example', markdown: 'markdown is awesome sauce')
+
     @notes = Note.with_text 'awesome sauce'
-    
-    assert_equal 1, @notes.count
-    @notes.each do |note|
-      assert_equal 'Indeed Markdown is awesome sauce', note.markdown
-    end
-    
-    @notes = Note.with_text 'Old Trashed'
-    assert_equal 1, @notes.count
-    assert_equal 'Old Trashed Note', @notes.first.title
-    
+    assert_equal @note_in_question, @notes.first
+
+    @notes = Note.with_text 'example'
+    assert_equal @note_in_question, @notes.first
+
   end
   
   test "can share" do

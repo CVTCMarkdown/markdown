@@ -2,7 +2,23 @@ require 'test_helper'
 
 class NotesControllerTest < ActionController::TestCase
   setup do
-    @note = notes(:one)
+    @user = User.create(email: 'user@markdown.com', password: 'password')
+    @user2 = User.create(email: 'user2@markdown.com', password: 'password')
+
+    sign_in @user
+
+    @note1 = Note.create(title: 'title1', markdown:'markdown1', active:true)
+    @user.notes << @note1
+    @user.tag(@note1, :with => 'tag1, tag2, tag3', :on => 'tags')
+
+    @note2 = Note.create(title: 'title2', markdown: 'markdown2', active:false)
+    @user.notes << @note2
+    @user.tag(@note2, :with => 'tag3, tag4, tag5', :on => 'tags')
+
+    @note3 = Note.create(title: 'title3', markdown: 'markdown3', active: true)
+    @user2.notes << @note3
+    @user2.tag(@note3, :with => 'tag1, tag2, tag3, tag4', :on => 'tags')
+
   end
 
   test "should get index" do
@@ -15,8 +31,8 @@ class NotesControllerTest < ActionController::TestCase
     assert_response :success
     
     # TEST ASSIGNS
-    assert_not_nil @notes = assigns(:notes)
-    assert_not_nil @trash_count = assigns(:trash_count) 
+    assert_not_nil notes = assigns(:notes)
+    assert_not_nil trash_count = assigns(:trash_count) 
     
     # TEST FLASH MESSAGES
     
@@ -24,11 +40,41 @@ class NotesControllerTest < ActionController::TestCase
     assert_template :index
     assert_template layout: 'application'
 
+    # TEST VIEWS
+    # TODO - move the notes list to a partial and assert that the template uses it
+    assert_select "table#note_list" do
+      assert_select "th.note.title", {text: 'Title'}
+      assert_select "th.note.last-update", {text: 'Last Updated'}
+      
+      notes.each do |note|
+        assert_select 'td.note.title > a[href=?]', edit_note_path(note), {text: note.title}
+        assert_select 'td.note.last-update', {text: note.updated_at.to_s}
+      end
+      
+    end
+    
+    assert_select "a[href=?]", trashed_notes_path, {text: "Trash Can (#{trash_count})"}
+
   end
 
   test "should get new" do
+    # TEST ROUTING
+    assert_routing({path: '/notes/new', method: 'get'}, {controller: 'notes', action: 'new'})
+    assert_routing(new_note_path, {controller: 'notes', action: 'new'})
+
+    # TEST REQUEST/RESPONSE
     get :new
     assert_response :success
+    
+    # TEST ASSIGNS
+    assert_not_nil assigns(:note)
+    
+    # TEST FLASH MESSAGES
+    
+    # TEST TEMPLATE
+    assert_template :new
+    assert_template layout: 'application'
+
   end
 
   test "should create note" do
