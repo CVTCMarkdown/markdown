@@ -1,6 +1,7 @@
 class SharedNoteController < ApplicationController
-  before_action :set_note, only: [:show] 
+  before_action :set_note, only: [:show]
   def show
+    render :layout => false
   end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -12,4 +13,5 @@ class SharedNoteController < ApplicationController
     def note_params
       params.require(:shared_token)
     end
+    
 end

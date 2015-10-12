@@ -11,11 +11,13 @@ class SharedNoteControllerTest < ActionController::TestCase
   
   test "should get shared_note" do
     get :show, shared_token: @note.shared_token
+    
     assert_response :success
     
     assert_template 'show', locals: { note: @note }
-
+    
+    assert_template(layout: false)
+    
   end
   
-
 end
