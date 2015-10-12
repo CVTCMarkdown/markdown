@@ -15,9 +15,6 @@ class SharedNoteControllerTest < ActionController::TestCase
     assert_response :success
     
     assert_template 'show', locals: { note: @note }
-  end
-  
-  test "should delete links" do
     
     assert_template(layout: false)
     
