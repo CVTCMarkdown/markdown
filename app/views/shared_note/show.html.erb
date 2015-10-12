@@ -1,6 +1,8 @@
 <% unless @note.blank? %>
 
 <%= hidden_field_tag :markdown, @note.markdown %>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 
 <div id="compiled" class="markdown">
