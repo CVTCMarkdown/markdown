@@ -2,7 +2,24 @@ require 'test_helper'
 
 class DashboardControllerTest < ActionController::TestCase
   setup do
-    sign_in users(:vhazen)
+
+    @user = User.create(email: 'user@markdown.com', password: 'password')
+    @user2 = User.create(email: 'user2@markdown.com', password: 'password')
+
+    sign_in @user
+
+    @note1 = Note.create(title: 'title1', markdown:'markdown1', active:true)
+    @user.notes << @note1
+    @user.tag(@note1, :with => 'tag1, tag2, tag3', :on => 'tags')
+
+    @note2 = Note.create(title: 'title2', markdown: 'markdown2', active:false)
+    @user.notes << @note2
+    @user.tag(@note2, :with => 'tag3, tag4, tag5', :on => 'tags')
+
+    @note3 = Note.create(title: 'title3', markdown: 'markdown3', active: true)
+    @user2.notes << @note3
+    @user2.tag(@note3, :with => 'tag1, tag2, tag3, tag4', :on => 'tags')
+
   end
 
   test "should get show" do
@@ -28,7 +45,7 @@ class DashboardControllerTest < ActionController::TestCase
     # TEST VIEWS
     assert_select "a[href=?]", new_note_path, {text: 'New Note'}
     assert_select "form#search_form[action=?]", "/notes"
-    
+
     # TODO - move the notes list to a partial and assert that the template uses it
     assert_select "#recent_notes>h3", {text: 'Recent Notes'}
     assert_select "table#note_list" do

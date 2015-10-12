@@ -17,7 +17,7 @@ class NotesControllerTest < ActionController::TestCase
 
     @note3 = Note.create(title: 'title3', markdown: 'markdown3', active: true)
     @user2.notes << @note3
-    @user2.tag(@note3, :with => 'tag1, tag2, tag3, tag4', :on => 'tags')
+    @user2.tag(@note3, :with => 'tag1, tag2, tag3, tag4, tag5, tag6', :on => 'tags')
 
   end
 
@@ -74,46 +74,69 @@ class NotesControllerTest < ActionController::TestCase
     # TEST TEMPLATE
     assert_template :new
     assert_template layout: 'application'
-
   end
 
   test "should create note" do
+    # TEST ROUTING
+    assert_routing({path: '/notes', method: 'post'}, {controller: 'notes', action: 'create'})
+    assert_routing({path: notes_path, method: 'post'}, {controller: 'notes', action: 'create'})
+
+    # TEST REQUEST/RESPONSE
     assert_difference('Note.count') do
-      post :create, note: { markdown: @note.markdown, tags: @note.tags, title: @note.title }
+      post :create, note: { markdown: @note1.markdown, tags: @note1.tags, title: @note1.title }
     end
 
-    assert_template 'edit', locals: { note: @note }
+    # TEST ASSIGNS
+    assert_not_nil assigns(:note)
 
-    #assert_redirected_to edit_note_path(assigns(:note))
+    # TEST FLASH MESSAGES
     assert_equal 'Note was successfully created.', flash[:notice]
+
+    # TEST TEMPLATE
+    assert_template 'edit', locals: { note: @note1 }
+    assert_template layout: 'application', partial: '_form'
   end
 
   test "should get edit" do
-    get :edit, id: @note
+
+
+
+    # TEST ROUTING
+    #assert_routing({path: "/notes/#{@note1.id}/edit", method: 'get', id: @note1.id }, {controller: 'notes', action: 'edit', id: @note1.id})
+    #assert_routing(edit_note_path(@note1), {controller: 'notes', action: 'edit', id: @note1})
+
+    # TEST REQUEST/RESPONSE
+    get :edit, id: @note1
     assert_response :success
 
+    # TEST ASSIGNS
+    assert_not_nil assigns(:note)
+
+    # TEST FLASH MESSAGES
+    assert_select "#notice", flash[:notice]
+
+    # TEST TEMPLATE
+    assert_template 'edit', locals: { note: @note1 }
+    assert_template layout: 'application', partial: '_form'
+
+    # TEST VIEWS
     assert_select "h1" do
       assert_select "+a.fa-arrow-left[href=?]", notes_path do
-        assert_select "+a.fa-share-square-o[href=?]", share_note_path(@note) do
-          assert_select "+a.fa-trash-o[href=?][data-method=?]", note_path(@note), 'delete'
+        assert_select "+a.fa-share-square-o[href=?]", share_note_path(@note1) do
+          assert_select "+a.fa-trash-o[href=?][data-method=?]", note_path(@note1), 'delete'
         end
       end
     end
-    
 
-
-    assert_select "input[name=?][value=?][maxlength=?]", "note[title]", "MyString", "250"
+    assert_select "input[name=?][value=?][maxlength=?]", "note[title]", @note1.title, "250"
     assert_select "input[name=?][value=?]", "note[tag_list]", ""
-    assert_select "textarea[name=?]", "note[markdown]", "MyText"
-
-
-    assert_select "#notice", flash[:notice]
+    assert_select "textarea[name=?]", "note[markdown]", @note1.markdown
   end
 
   test "should update note" do
-    patch :update, id: @note, note: { markdown: @note.markdown, tags: @note.tags, title: @note.title }
+    patch :update, id: @note1, note: { markdown: @note1.markdown, tags: @note1.tags, title: @note1.title }
     
-    assert_template 'edit', locals: { note: @note }
+    assert_template 'edit', locals: { note: @note1}
 
     assert_equal 'Note was successfully updated.', flash[:notice]
   end
@@ -122,7 +145,7 @@ class NotesControllerTest < ActionController::TestCase
 
     assert_difference("Note.where('active=?', false).count", 1) do
       assert_difference("Note.where('active=?',true).count", -1) do
-        delete :destroy, id: @note
+        delete :destroy, id: @note1
       end
     end
 
@@ -131,12 +154,12 @@ class NotesControllerTest < ActionController::TestCase
   end
   
   test "should share note" do
-    put :share, id: @note
+    put :share, id: @note1
     assert_redirected_to edit_note_path
   end
   
   test "should unshare note" do
-    put :unshare, id: @note
+    put :unshare, id: @note1
     assert_redirected_to edit_note_path
   end
   
@@ -144,7 +167,7 @@ class NotesControllerTest < ActionController::TestCase
     xhr :post, :autocomplete_tag_name, term:"tag"
     assert_response :success
     body = JSON.parse response.body
-    assert_equal 3, body.count 
+    assert_equal 6, body.count
     
   end
   

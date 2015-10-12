@@ -1,14 +1,13 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :unshare]
-  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag' 
-
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.active
+    @notes = current_user.notes.active
     @notes = @notes.active.with_text(params[:search]) unless params[:search].blank?
-    @trash_count = Note.inactive.count
+    @trash_count = current_user.notes.inactive.count
   end
 
   # GET /notes/1
@@ -47,8 +46,9 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
     @note.active = true
 
+
     respond_to do |format|
-      if @note.save
+      if current_user.notes << @note
         flash[:notice] = 'Note was successfully created.'
         format.html { render :edit }
         format.json { render :show, status: :created, location: @note }
@@ -92,11 +92,11 @@ class NotesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_note
-      @note = Note.find_by! id: params[:id], active: true
+      @note = current_user.notes.find_by! id: params[:id], active: true
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:title, :markdown, :tag_list, :search)
+      params.require(:note).permit(:title, :markdown, :search, :tag_list)
     end
 end

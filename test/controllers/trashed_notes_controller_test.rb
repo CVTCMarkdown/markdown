@@ -2,8 +2,22 @@ require 'test_helper'
 
 class TrashedNotesControllerTest < ActionController::TestCase
   setup do
-    @note = notes(:deletedNote)
-    sign_in users(:vhazen)
+    @user = User.create(email: 'user@markdown.com', password: 'password')
+    @user2 = User.create(email: 'user2@markdown.com', password: 'password')
+
+    sign_in @user
+
+    @note = Note.create(title: 'title1', markdown:'markdown1', active:false)
+    @user.notes << @note
+    @user.tag(@note, :with => 'tag1, tag2, tag3', :on => 'tags')
+
+    @note2 = Note.create(title: 'title2', markdown: 'markdown2', active:false)
+    @user.notes << @note2
+    @user.tag(@note2, :with => 'tag3, tag4, tag5', :on => 'tags')
+
+    @note3 = Note.create(title: 'title3', markdown: 'markdown3', active: true)
+    @user2.notes << @note3
+    @user2.tag(@note3, :with => 'tag1, tag2, tag3, tag4, tag5, tag6', :on => 'tags')
   end
 
   test "should get index" do
