@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-<head>
-  <title>Markdown</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= image_tag 'logo.png', :alt => 'logo' %> 
-<%= link_to 'Dashboard', root_path, class: 'dashboard' %>
-<
-<%= yield %>
-=======
+
   <head>
     <title>Lightbulb</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -26,7 +13,7 @@
     <%= link_to "New Note", new_note_path %>
     <%= link_to 'Trash Can', trashed_notes_path %>
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
->>>>>>> e0d053b16b09fe45dd0a5560db3fd6e2d63e96ef
+
 
     <% if user_signed_in? %>
       <div>Signed in as <%= link_to current_user.email, edit_user_registration_path %></div>
