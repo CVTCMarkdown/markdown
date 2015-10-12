@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Lightbulb</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -12,6 +13,7 @@
     <%= link_to "New Note", new_note_path %>
     <%= link_to 'Trash Can', trashed_notes_path %>
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
 
     <% if user_signed_in? %>
       <div>Signed in as <%= link_to current_user.email, edit_user_registration_path %></div>
