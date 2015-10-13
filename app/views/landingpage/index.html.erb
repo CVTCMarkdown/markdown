@@ -1,14 +1,13 @@
-
 <%= image_tag 'LightbulbLogo.png', :alt => 'LightBulb' %> 
 <h3>Example:</h3>
 <%= image_tag 'lightbulb_screen_capture.png', :alt => 'LightBulb Example', :class => "style_example_image" %> 
 <h1>Welcome to Lightbulb!</h1>
-    <form action="/users/sign_up" action="/users/sign_in" >
-        <input type="submit" value="Sign Up">
-    </form>
-        Or
-    <form action="/users/sign_in" >
-        <input type="submit" value="Log In">
-    </form>
+<form action="/users/sign_up" id="SignUp">
+    <input type="submit" value="Sign Up"> 
+</form>
+<div>Or</div>
+<form action="/users/sign_in" id="SignIn">
+    <input type="submit" value="Log In">
+</form>
 
 
