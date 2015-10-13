@@ -2,7 +2,7 @@ class TrashedNotesController < ApplicationController
   before_action :set_note, only: [:update, :destroy]
   
   def index
-    @notes = Note.where("active=?", false)
+    @notes = current_user.notes.inactive
   end
 
   def update
@@ -21,7 +21,7 @@ class TrashedNotesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_note
-      @note = Note.find_by! id: params[:id], active: false
+      @note = current_user.notes.inactive.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

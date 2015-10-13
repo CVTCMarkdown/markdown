@@ -4,7 +4,6 @@ class LayoutViewsTest < ActionView::TestCase
   include Devise::TestHelpers
   
   setup do
-    
     @user = User.create(email: 'user@markdown.com', password: '12345678')
     @user2 = User.create(email: 'user2@markdown.com', password: 'password')
 

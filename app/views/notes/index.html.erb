@@ -2,19 +2,19 @@
 
 <h1>Listing Notes</h1>
 
-<table>
+<table id="note_list">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Last Update</th>
+      <th class="note title">Title</th>
+      <th class="note last-update">Last Updated</th>
     </tr>
   </thead>
 
   <tbody>
     <% @notes.each do |note| %>
       <tr>
-        <td><%= link_to note.title, edit_note_path(note), class: "titleTable" %></td>
-        <td><%= note.updated_at %></td>
+        <td class="note title"><%= link_to note.title, edit_note_path(note), class: "titleTable" %></td>
+        <td class="note last-update"><%= note.updated_at %></td>
       </tr>
     <% end %>
   </tbody>

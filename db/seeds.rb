@@ -6,33 +6,32 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+user = User.create(email: 'user@markdown.com', password: 'password')
+user2 = User.create(email: 'user2@markdown.com', password: 'password')
 
 goodAdjectivesPattern = /^((?!(un)?\w+(ing|less)$)|(?=\w+_))/
 RandomWord.exclude_list << /^.{8,}$/ 
-RandomWord.exclude_list << /^.{0,6}$/ 
+RandomWord.exclude_list << /^.{0,6}$/
 
-loop do
-  noteCount = Note.count
-  break if noteCount >= 20
-  
-  begin
+[user, user2].each do |usr|
+  (0..20).each do |n|
 
     RandomWord.exclude_list << goodAdjectivesPattern
-    
-    nextMarkdown = "Yesterday I saw the most " + RandomWord.adjs.rewind.take(5).join(", ")
-    
+
+    next_markdown = "Yesterday I saw the most " + RandomWord.adjs.rewind.take(5).join(", ")
+
     RandomWord.exclude_list.delete goodAdjectivesPattern
-    
-    nextMarkdown << " " + RandomWord.nouns.rewind.next
-    
-    nextTags = RandomWord.nouns.take(3).join(", ")
-    
-    Note.create(title: "Note #{noteCount}", markdown: nextMarkdown, active: true, tag_list: nextTags)
 
-  rescue StopIteration => e
-    puts e
+    next_markdown << " " + RandomWord.nouns.rewind.next
 
-    next
+    next_tags = RandomWord.nouns.take(3).join(", ")
+
+    the_note = Note.create(title: "Note #{n}", markdown: next_markdown, active: true)
+
+    usr.notes << the_note
+    usr.tag(the_note, :with => next_tags, :on => :tags)
+
   end
-
 end
+
+
