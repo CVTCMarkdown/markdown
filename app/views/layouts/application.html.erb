@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%= image_tag 'logo.png', :alt => 'LightBulb', :class => 'logo' %> 
     <%= link_to 'Dashboard', dashboard_path, class: 'dashboard' %>
     <%= link_to "New Note", new_note_path %>
     <%= link_to 'Trash Can', trashed_notes_path %>
