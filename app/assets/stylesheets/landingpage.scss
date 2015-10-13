@@ -1,3 +1,12 @@
-// Place all the styles related to the landingpage controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+div {&.landingpage{
+    display: inline-block;
+ }
+};
+
+.style_example_image {
+  border: 1px solid #000;
+  width: 900px;
+  
+}
+
+
